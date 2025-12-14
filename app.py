@@ -15,6 +15,7 @@ key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 BUCKET_NAME = "audio_files"
 ENABLE_WRITE = os.environ.get("ENABLE_WRITE_OPERATIONS", "False").lower() in ('true', '1', 't', 'yes')
+CHUNK_SIZE = int(os.environ.get("STREAM_CHUNK_SIZE", 2048))
 
 @app.context_processor
 def inject_permissions():
@@ -132,7 +133,7 @@ def stream_audio(audio_id):
     upstream_response = requests.get(source_url, headers=headers, stream=True)
 
     def generate():
-        for chunk in upstream_response.iter_content(chunk_size=4096):
+        for chunk in upstream_response.iter_content(chunk_size=CHUNK_SIZE):
             yield chunk
 
     response = Response(stream_with_context(generate()), 
