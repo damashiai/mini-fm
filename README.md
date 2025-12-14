@@ -1,20 +1,22 @@
 # Mini-FM
 
-> A high-performance audio streaming backend demonstrating secure content delivery and binary stream handling.
+> A simple audio streaming backend that demonstrates secure content delivery and basic binary stream handling.
 
-Mini-FM is a full-stack application designed to showcase advanced backend engineering principles. It implements a secure proxy server to handle byte-range requests, enabling efficient audio seeking and partial content delivery (HTTP 206) without exposing the underlying storage infrastructure to the client.
+Mini-FM is a full-stack application, which implements a secure proxy server to handle byte-range requests, enabling efficient audio seeking and partial content delivery (HTTP 206) without exposing the underlying storage infrastructure to the client.
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue?style=flat-square)
 ![Flask](https://img.shields.io/badge/Flask-Backend-green?style=flat-square)
 ![Supabase](https://img.shields.io/badge/Supabase-DB%20%26%20Storage-emerald?style=flat-square)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=flat-square)
 
+[![View Demo](https://img.shields.io/badge/Demo-Click_Here-red?style=flat-square)](https://mini-fm.vercel.app/)
+
 ## Key Technical Features
 
-* **Byte-Range Streaming (HTTP 206):** Implements manual handling of HTTP `Range` headers. The server parses the requested byte intervals and fetches only the necessary chunks from cloud storage, allowing for instant seeking and reduced bandwidth consumption.
-* **Secure Proxy Architecture:** Utilizes a "Bouncer" pattern where the Flask backend acts as an intermediary. This ensures that direct storage URLs are never exposed to the client, allowing for strict access control and data sanitization before delivery.
-* **Row Level Security (RLS):** Integrates with Supabase's RLS policies to enforce database-level security. Write and delete operations are restricted by policy, ensuring data integrity even if API keys are compromised.
-* **MIME-Type Intelligence:** dynamically detects and serves correct `Content-Type` headers for various audio formats (MP3, M4A), ensuring cross-browser compatibility.
+- **Byte-Range Streaming (HTTP 206):** Handles `Range` requests so clients can seek within audio files without downloading them in full.
+- **Secure Proxy Backend:** Serves audio through the backend to avoid exposing direct storage URLs.
+- **Row-Level Security (RLS):** Uses Supabase RLS policies to restrict write and delete operations.
+- **MIME Type Handling:** Sets correct `Content-Type` headers for formats like MP3 and M4A to ensure consistent playback.
 
 ## Architecture & Tech Stack
 
@@ -59,7 +61,7 @@ You can run the application using Docker (recommended) or a local Python environ
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/damashiai/mini-fm.git](https://github.com/damashiai/mini-fm.git)
+    git clone https://github.com/damashiai/mini-fm.git
     cd mini-fm
     ```
 
