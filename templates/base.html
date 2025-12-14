@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>MiniFM | Stream</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#E50914',
+                        dark: '#141414',
+                        card: '#1f1f1f',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #141414; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #141414; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body class="text-white font-sans antialiased h-screen flex flex-col overflow-hidden">
+
+    <nav class="px-4 py-4 md:px-8 md:py-5 flex justify-between items-center fixed w-full z-50 bg-gradient-to-b from-black/90 to-transparent backdrop-blur-sm">
+        <a href="/" class="text-2xl md:text-3xl font-bold text-brand tracking-tighter hover:text-red-500 transition">
+            MINI<span class="text-white">FM</span>
+        </a>
+        
+        {% if can_write %}
+        <a href="/upload" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 text-sm md:text-base md:px-5 rounded font-medium transition backdrop-blur-md border border-white/10">
+            Upload
+        </a>
+        {% endif %}
+    </nav>
+
+    <main class="flex-grow overflow-y-auto pt-20 pb-28 px-4 md:px-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <div class="fixed bottom-0 w-full bg-[#121212] border-t border-white/10 px-4 py-3 md:px-6 flex items-center justify-between z-50 h-20 safe-area-bottom">
+        
+        <div class="flex items-center w-1/2 md:w-1/3 min-w-0 pr-2">
+            <img id="player-art" src="" class="w-10 h-10 md:w-12 md:h-12 rounded bg-gray-800 object-cover mr-3 opacity-0 transition-opacity duration-500 flex-shrink-0">
+            <div class="truncate">
+                <h4 id="player-title" class="text-white text-xs md:text-sm font-semibold truncate">Select a track...</h4>
+                <p id="player-artist" class="text-[10px] md:text-xs text-gray-400 truncate"></p>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center justify-center w-1/2 md:w-1/3">
+            <audio id="audio-player" class="w-full h-8 block" controlsList="nodownload" controls></audio>
+        </div>
+
+        <div class="hidden md:flex w-1/3 justify-end text-xs text-gray-500 font-medium">
+            <a href="https://freetouse.com/music/category/lofi"><span class="text-brand ml-1">COPYRIGHT-FREE</span>&nbsp;MUSIC</a>
+        </div>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audio-player');
+        const playerTitle = document.getElementById('player-title');
+        const playerArtist = document.getElementById('player-artist');
+        const playerArt = document.getElementById('player-art');
+
+        function playSong(id, title, artist, artUrl) {
+            audioPlayer.src = `/stream/${id}`;
+            playerTitle.textContent = title;
+            playerArtist.textContent = artist;
+            playerArt.src = artUrl;
+            playerArt.classList.remove('opacity-0');
+            audioPlayer.play();
+        }
+    </script>
+</body>
+</html>

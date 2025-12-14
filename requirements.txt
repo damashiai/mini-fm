@@ -1,0 +1,4 @@
+Flask
+supabase
+python-dotenv
+requests

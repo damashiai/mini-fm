@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
+    <h1 class="text-[150px] font-bold text-brand leading-none opacity-90 select-none">
+        {{ error_code }}
+    </h1>
+    
+    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        {% if error_code == 404 %}
+            Lost in the Static?
+        {% elif error_code == 403 %}
+            Access Denied
+        {% else %}
+            System Error
+        {% endif %}
+    </h2>
+
+    <p class="text-gray-400 text-lg max-w-lg mb-8">
+        {{ error_message }}
+    </p>
+
+    <a href="/" class="bg-white text-black hover:bg-gray-200 font-bold py-3 px-8 rounded transition transform hover:scale-105">
+        Return Home
+    </a>
+</div>
+{% endblock %}
