@@ -119,6 +119,11 @@ def delete_song(audio_id):
 
 @app.route('/stream/<int:audio_id>')
 def stream_audio(audio_id):
+    # Check referer
+    referer = request.headers.get("Referer")
+    if referer is None or not referer.startswith(request.host_url):
+        abort(403, description="Direct access to audio streams is forbidden.")
+
     data = supabase.table('audio_files').select("file_path").eq("id", audio_id).execute()
     
     if not data.data:
