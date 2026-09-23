@@ -1,0 +1,14 @@
+{
+  "name": "MiniFM — moods into music",
+  "short_name": "MiniFM",
+  "description": "Describe a mood or explore the catalog. Free streaming, no account needed.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#141414",
+  "theme_color": "#141414",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

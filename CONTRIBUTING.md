@@ -1,6 +1,6 @@
-# Contributing to Mini-FM
+# Contributing to MiniFM
 
-First off, thanks for taking the time to contribute! 🎉
+First off, thanks for taking the time to contribute!
 
 ## How to Contribute
 
@@ -22,6 +22,7 @@ First off, thanks for taking the time to contribute! 🎉
 
 ## Development Guidelines
 
-* **Code Style:** Please follow PEP 8 guidelines for Python code.
-* **Dependencies:** If you add a new library, please update `requirements.txt`.
-* **Testing:** Ensure the application starts and basic Upload/Stream/Delete functions work before submitting.
+* **Code Style:** TypeScript + Next.js App Router. Run `npm run typecheck` before submitting.
+* **Dependencies:** If you add a new library, please update `package.json` (`npm install --save <pkg>`).
+* **Testing:** Ensure `npm run build` passes and playback, mood mixes, and admin upload work end-to-end before submitting.
+* **Metadata:** enrichment is MusicBrainz (keyless) + Cover Art Archive. Respect their policy: descriptive User-Agent (already set) and ~1 req/sec (already throttled in `lib/musicbrainz.ts`). No scraping, no extra metadata vendors without discussion.

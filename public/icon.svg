@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- MiniFM mark: solid red tile, oversized rounded play needle -->
+  <rect width="512" height="512" rx="116" fill="#E50914"/>
+  <path d="M208 162 L362 256 L208 350 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="30" stroke-linejoin="round"/>
+</svg>

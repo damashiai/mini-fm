@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: #141414;
+}
+
+body {
+  background: #141414;
+  color: #f5f5f5;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom range input (seek + volume): styled, touch-friendly.
+   Geometry is exact: 24px-tall transparent native track centered in the 24px
+   input, 16px thumb with 4px top margin → thumb center always sits on the
+   painted 5px div line (which is centered in its own 24px box). */
+input[type="range"].seek {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+}
+input[type="range"].seek::-webkit-slider-runnable-track {
+  height: 24px;
+  background: transparent;
+}
+input[type="range"].seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+input[type="range"].seek::-moz-range-track {
+  height: 24px;
+  background: transparent;
+}
+input[type="range"].seek::-moz-range-progress {
+  height: 24px;
+  background: transparent;
+}
+/* Thumb grows while grabbed */
+input[type="range"].seek:active::-webkit-slider-thumb {
+  transform: scale(1.25);
+}
+input[type="range"].seek:active::-moz-range-thumb {
+  transform: scale(1.25);
+}
+input[type="range"].seek::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 999px;
+  background: #fff;
+}
+
+/* Buffered indicator: a thin wash confined to the 5px track line */
+.seek-buffered {
+  background:
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.28) var(--buffered, 0%),
+      rgba(255, 255, 255, 0.08) var(--buffered, 0%)
+    );
+}
+
+.lyrics-scroll {
+  scroll-behavior: smooth;
+}
+.lyrics-scroll::-webkit-scrollbar {
+  width: 0;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Native scrollbars: thin, dark, brand on hover */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 999px;
+  border: 2px solid #141414;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e50914;
+  border-color: #141414;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Visible keyboard focus for buttons/links/cards (inputs keep their own ring) */
+:where(button, a, [role="button"]):focus-visible {
+  outline: 2px solid #e50914;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Shimmer skeleton used by loading.tsx boundaries + inline loaders */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #2a2a2a;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.09),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+  .animate-rise {
+    animation: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-rise {
+  animation: rise 0.25s ease-out;
+}
