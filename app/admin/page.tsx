@@ -105,7 +105,7 @@ export default async function AdminDashboard() {
                   {names.get(s.id) ?? "—"} · {s.play_count} plays
                 </p>
               </div>
-              <Link href={`/song/${s.slug}`} className="text-xs text-muted hover:text-white">
+              <Link href={`/song/${s.id}`} className="text-xs text-muted hover:text-white">
                 View
               </Link>
               <Link href={`/admin/songs/${s.id}`} className="rounded-lg bg-card px-3 py-1.5 text-xs font-semibold hover:bg-line">

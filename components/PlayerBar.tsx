@@ -158,7 +158,7 @@ export default function PlayerBar() {
         <div className="flex min-w-0 items-center gap-3">
           <Art src={current.coverArt} title={current.title} size="h-12 w-12" />
           <div className="min-w-0">
-            <Link href={`/song/${current.slug}`} className="block truncate text-sm font-semibold hover:underline">
+            <Link href={`/song/${current.id}`} className="block truncate text-sm font-semibold hover:underline">
               {current.title}
             </Link>
             <div className="truncate text-xs text-muted">{current.artistNames}</div>
